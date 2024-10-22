@@ -1,0 +1,73 @@
+<ng-template
+	#blockTemp
+	let-name="name"
+	let-timeline="timeline"
+	let-width="width"
+	let-height="height"
+	let-widthDivider="widthDivider"
+	let-notShowDivider="notShowDivider"
+	let-showVertical="showVertical">
+	<div
+		class="block"
+		[class.active]="timeline === timelineCount"
+		[style.width.px]="width"
+		[style.height.px]="height">
+		{{ name }}
+		<bc-divider
+			*ngIf="!notShowDivider && showVertical"
+			vertical
+			color="var(--bosch-gray-20)"
+			style="position: absolute; transform: translateY(100%);">
+		</bc-divider>
+	</div>
+	
+	<bc-divider
+		*ngIf="!notShowDivider && !showVertical"
+		color="var(--bosch-gray-20)"
+		[style.width.px]="widthDivider">
+	</bc-divider>
+</ng-template>
+
+<div style="display: flex; align-items: center; flex-direction: column;">
+	<div class="block-container" style="margin-bottom: 59px">
+		<ng-container *ngFor="let block of row1; let last = last;">
+			<ng-container
+				*ngTemplateOutlet="blockTemp; context: {
+					name: block?.name,
+					timeline: block?.timeline,
+					width: block?.width,
+					height: block?.height,
+					showVertical: last,
+				}">
+			</ng-container>
+		</ng-container>
+	</div>
+	
+	<div class="block-container" style="flex-direction: row-reverse;">
+		<ng-container *ngFor="let block of row2; let last = last;">
+			<ng-container
+				*ngTemplateOutlet="blockTemp; context: {
+					name: block?.name,
+					timeline: block?.timeline,
+					width: block?.width,
+					height: block?.height,
+					notShowDivider: last,
+					widthDivider: 70,
+				}">
+			</ng-container>
+		</ng-container>
+	</div>
+</div>
+
+
+<div class="video-wrapper">
+	<div class="video-container">
+		<video
+			src='assets/video.mp4'
+			controls
+			muted
+			controlsList="nofullscreen nodownload"
+			(timeupdate)="timeUpdate($event)">
+		</video>
+	</div>
+</div>

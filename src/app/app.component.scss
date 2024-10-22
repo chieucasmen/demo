@@ -1,0 +1,49 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bosch-gray-95);
+    padding: 10px;
+
+    .video-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        margin-top: 10px;
+
+        .video-container {
+            width: 65%;
+            background-color: black;
+    
+            video {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    .block-container {
+        display: flex;
+        align-items: center;
+        width: 600px;
+        
+
+        .block {
+            width: 100px;
+            height: 50px;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-wrap: nowrap;
+            padding: 5px;
+            border-radius: 5px;
+            position: relative;
+            background-color: white;
+
+            &.active {
+                background-color: var(--bosch-green);
+            }
+        }
+    }
+}
